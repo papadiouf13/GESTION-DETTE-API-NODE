@@ -1,0 +1,31 @@
+{
+  "name": "gestion-dette-api-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon - exec 'ts-node' src/server.ts",
+    "build": "tsc",
+    "serve": "node dist/server.js",
+    "db:migrate": "npx prisma migrate dev --name user-entity --create-only; npx prisma generate",
+    "db:push": "npx prisma db push",
+    "db:show": "npx prisma studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "prisma": "^5.18.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.18.0",
+    "@types/express": "^4.17.21",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "gestion-dette-api-node": "file:",
+    "http-status-codes": "^2.3.0"
+  }
+}

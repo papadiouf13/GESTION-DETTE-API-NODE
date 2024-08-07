@@ -1,0 +1,32 @@
+### Ajouter un nouveau client
+POST http://localhost:5000/api/v1/clients
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nom": "Sougou",
+    "prenom": "MAloum",
+    "telephone": "772142787",
+    "photo": "maloum.jpg"
+}
+
+###
+
+### Récupérer tous les clients
+GET http://localhost:5000/api/v1/clients
+
+###
+
+### Récupérer un client par ID
+GET http://localhost:5000/api/v1/clients/1
+
+###
+
+### Récupérer un client par numéro de téléphone
+POST http://localhost:5000/api/v1/clients/telephone
+Content-Type: application/json
+Accept: application/json
+
+{
+    "telephone": "772142787"
+}

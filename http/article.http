@@ -1,0 +1,30 @@
+
+POST http://localhost:5000/api/v1/articles
+Content-Type: application/json
+Accept: application/json
+
+{
+    "libelle" : "Lait",
+    "prix": 12000,
+    "qteStock": 500
+}
+
+###
+
+GET http://localhost:5000/api/v1/articles
+
+
+
+###
+
+GET http://localhost:5000/api/v1/articles/1
+
+###
+
+POST http://localhost:5000/api/v1/articles/libelle
+Content-Type: application/json
+Accept: application/json
+
+{
+    "libelle" : "Lait"
+}
