@@ -5,8 +5,8 @@ Accept: application/json
 
 {
     "libelle" : "Lait",
-    "prix": 12000,
-    "qteStock": 500
+    "prix": 1000,
+    "qteStock": 1000
 }
 
 ###

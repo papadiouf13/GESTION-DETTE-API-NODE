@@ -1,0 +1,21 @@
+### Ajouter un nouvel utilisateur
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYW1hZG91QGdtYWlsLmNvbSIsInJvbGUiOiJDTElFTlQiLCJpYXQiOjE3MjM1NjUyMTcsImV4cCI6MTcyMzY1MTYxN30.hdHHLUMz86LLjYMUR9JHaas5BTJUQtnHS79clLDd6CQ
+
+{
+    "email": "mamadou@gmail.com",
+    "password": "mamadou",
+    "clientId": 1
+}
+
+### connexion avec un utilisateur
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "mamadou@gmail.com",
+    "password": "mamadou"
+}
+

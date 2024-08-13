@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import Controller from "../core/impl/controller";
-import prisma from "../core/impl/prisma.model";
 import { StatusCodes } from "http-status-codes";
 import { RestResponse } from "../core/response";
+import app from "../app";
 
 class ArticleController extends Controller {
   async create(req: Request, res: Response) {
     try {
-      const newArticle = await prisma.article.create({
+      const newArticle = await app.prisma.article.create({
         data: req.body
       });
       res
@@ -22,7 +22,7 @@ class ArticleController extends Controller {
 
   async getAll(req: Request, res: Response) {
       try {
-        const datas = await prisma.article.findMany({
+        const datas = await app.prisma.article.findMany({
           select: {
             id: true,
             libelle: true,
@@ -43,7 +43,7 @@ class ArticleController extends Controller {
 
   async getById(req: Request, res: Response) {
     try {
-      const datas = await prisma.article.findFirstOrThrow({
+      const datas = await app.prisma.article.findFirstOrThrow({
         where: {id: Number.parseInt(req.params.id)},
         select: {
           id: true,
@@ -66,7 +66,7 @@ class ArticleController extends Controller {
 
   async getByLibelle(req: Request, res: Response) {
     try {
-      const datas = await prisma.article.findFirstOrThrow({
+      const datas = await app.prisma.article.findFirstOrThrow({
         where: {libelle: req.body.libelle},
         select: {
           id: true,

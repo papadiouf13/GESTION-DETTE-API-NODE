@@ -17,7 +17,9 @@ model Article {
   id        Int       @id @default(autoincrement())
   libelle   String    @unique
   prix      Float
+  photo     String?
   qteStock  Float
+  articles        ArticlesOnDettes[]
   createAt  DateTime  @default(now())
   updateAt  DateTime  @updatedAt
 }
@@ -28,7 +30,70 @@ model Client {
   prenom    String
   telephone String   @unique
   photo     String?
+  user      User? 
+  dettes    Dette[]   
   createAt  DateTime  @default(now())
   updateAt  DateTime  @updatedAt
 }
 
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      Role     @default(CLIENT)
+  client    Client   @relation(fields: [clientId], references: [id])   
+  clientId  Int      @unique
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Dette {
+  id              Int      @id @default(autoincrement())
+  date            DateTime @default(now())
+  montant         Float
+  montantVerser   Float @default(0)
+  montantDue      Float @default(0)
+  clientId        Int 
+  paiements       Paiement[]
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade, map: "Dette_clientId_fk")
+  articles        ArticlesOnDettes[]
+  createAt        DateTime  @default(now())
+  updateAt        DateTime  @updatedAt
+
+  @@index([clientId], map: "Dette_clientId_idx")
+}
+
+model Paiement{
+    id        Int       @id @default(autoincrement())
+    date      DateTime  @default(now())
+    montant   Int
+    detteId   Int
+    dette     Dette     @relation(fields: [detteId], references: [id], onDelete: Cascade, map: "Paiement_detteId_fk")
+    createAt        DateTime  @default(now())
+    updateAt        DateTime  @updatedAt
+
+    @@index([detteId], map: "Paiement_detteId_idx")
+}
+
+
+model ArticlesOnDettes {
+  dette     Dette     @relation(fields: [detteId], references: [id])
+  detteId             Int
+  article     Article     @relation(fields: [articleId], references: [id])
+  articleId           Int
+  prixVente           Float
+  qteVente            Float
+  createAt        DateTime  @default(now())
+
+
+
+
+@@id([detteId, articleId])
+}
+
+enum Role {
+  CLIENT
+  ADMIN
+  BOUTIQUIER
+}
